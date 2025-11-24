@@ -1,0 +1,5 @@
+name: quarkus-mapstruct
+title: Mapstruct
+version: dev
+nav:
+  - modules/ROOT/nav.adoc
