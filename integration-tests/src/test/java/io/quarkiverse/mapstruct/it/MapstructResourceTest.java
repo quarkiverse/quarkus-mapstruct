@@ -13,9 +13,10 @@ public class MapstructResourceTest {
     @Test
     public void testHelloEndpoint() {
         given()
-                .when().get("/mapstruct")
+                .when().get("/mapstruct/basic/test")
                 .then()
                 .statusCode(200)
-                .body(is("Hello mapstruct"));
+                .body(is(
+                        "io.quarkiverse.mapstruct.it.basic.AddressMapperImpl|io.quarkiverse.mapstruct.it.basic.AddressMapperImpl"));
     }
 }
