@@ -49,6 +49,12 @@ This extension automatically takes care of registering all:
 
 Models are not registered, since they are, most likely, already covered (e.g. through quarkus-rest, or quarkus-hibernate-orm).
 
+**Dev Mode Recompilation**:
+Automatic recompilation of mapper classes when referenced classes change.
+
+MapStruct generates mapper implementation classes at compile time based on the classes they reference. In Quarkus dev mode, when you modify a class (e.g., add a new field to a DTO), the generated mapper implementation may become outdated.
+
+This extension automatically tracks all types referenced by your `@Mapper` annotated classes and their generated implementations. When any of the referenced classes change, the corresponding mapper classes are automatically recompiled, ensuring your mappers stay in sync with your models.
 
 == Installation
 
@@ -90,7 +96,7 @@ Add the MapStruct annotation processor to your Maven compiler plugin configurati
                     <path>
                         <groupId>org.mapstruct</groupId>
                         <artifactId>mapstruct-processor</artifactId>
-                        <version>1.6.3</version>
+                        <version>${mapstruct.version}</version>
                     </path>
                 </annotationProcessorPaths>
             </configuration>
