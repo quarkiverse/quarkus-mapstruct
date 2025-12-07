@@ -1,14 +1,64 @@
-= Quarkus Mapstruct
+= Quarkus MapStruct
 
 include::./includes/attributes.adoc[]
 
-TIP: Describe what the extension does here.
+This extension integrates https://mapstruct.org/[MapStruct] with Quarkus, providing native image support for MapStruct.
+
+MapStruct is a code generator that simplifies the implementation of mappings between Java bean types based on a convention over configuration approach. For the complete MapStruct documentation, please refer to the https://mapstruct.org/documentation/stable/reference/html/[official MapStruct Reference Guide].
+
+== Features
+
+This extension provides the following features for MapStruct in Quarkus:
+
+**Native Image Support**:
+Full GraalVM native image support with no additional configuration required.
+
+MapStruct only requires reflection during `Mappers.getMapper` calls. These can fail with an ClassNotFoundException in native, if the mapper class is not registered for reflection.
+
+Examples:
+
+[source,java,opts=novalidate]
+----
+@Mapper
+public class AddressMapper {
+}
+
+@Mapper
+public class ContactMapper {
+}
+
+public class AddressResource {
+    private AddressMapper mapper = Mappers.getMapper(AddressMapper.class)
+
+    void doSomething() {
+
+        mapper.mapAddress(..);  <1>
+
+        Mappers.getMapper(ContactMapper.class).mapContact(..);  <2>
+    }
+}
+----
+ <1> Works, since GraalVM detects the AddressMapper class, and registers it for native Image.
+ <2> throws a ClassNotFoundException
+
+This extension automatically takes care of registering all:
+* `@Mapper` annotated classes
+* classes referenced in the `uses` attribute of the Mapper itself, and from the referenced `@MapperConfig`,
+* The decorator type from `@DecoratedWith`
+* and all superclasses of the previously found classes for reflection.
+
+Models are not registered, since they are, most likely, already covered (e.g. through quarkus-rest, or quarkus-hibernate-orm).
+
 
 == Installation
 
-If you want to use this extension, you need to add the `io.quarkiverse.mapstruct:quarkus-mapstruct` extension first to your build file.
+=== Add the Extension
 
-For instance, with Maven, add the following dependency to your POM file:
+To use this extension, add the following dependencies to your build file.
+
+For now, no specific version of mapstruct is required. The extension only reads the annotations (e.g. `Mapper`, `MapperConfig`), and does not interface with the MapStruct API.
+
+However, the extension is always only tested against the newest version of MapStruct.
 
 [source,xml,subs=attributes+]
 ----
@@ -17,11 +67,45 @@ For instance, with Maven, add the following dependency to your POM file:
     <artifactId>quarkus-mapstruct</artifactId>
     <version>{project-version}</version>
 </dependency>
+<dependency>
+    <groupId>org.mapstruct</groupId>
+    <artifactId>mapstruct</artifactId>
+    <version>1.6.3</version>
+</dependency>
 ----
 
-[[extension-configuration-reference]]
-== Extension Configuration Reference
+=== Configure the Annotation Processor
 
-TIP: Remove this section if you don't have Quarkus configuration properties in your extension.
+Add the MapStruct annotation processor to your Maven compiler plugin configuration:
 
-include::includes/quarkus-mapstruct.adoc[leveloffset=+1, opts=optional]
+[source,xml]
+----
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <annotationProcessorPaths>
+                    <path>
+                        <groupId>org.mapstruct</groupId>
+                        <artifactId>mapstruct-processor</artifactId>
+                        <version>1.6.3</version>
+                    </path>
+                </annotationProcessorPaths>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+----
+
+== Usage
+
+Once installed, you can use MapStruct as you normally would.
+
+== Additional Resources
+
+* https://mapstruct.org/[MapStruct Official Website]
+* https://mapstruct.org/documentation/stable/reference/html/[MapStruct Reference Guide]
+* https://github.com/mapstruct/mapstruct[MapStruct GitHub Repository]
+* https://github.com/quarkiverse/quarkus-mapstruct[This Extension's GitHub Repository]
