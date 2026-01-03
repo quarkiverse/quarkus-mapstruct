@@ -32,7 +32,6 @@
 
         <compiler-plugin.version>3.14.1</compiler-plugin.version>
         <quarkus.version>999-SNAPSHOT</quarkus.version>
-        <mapstruct.version>1.6.3</mapstruct.version>
     </properties>
 
     <dependencyManagement>
