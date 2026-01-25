@@ -4,7 +4,7 @@
 
 ## Welcome to Quarkiverse!
 
-This quarkus extensions allows to use MaStruct in native quarkus applications.
+This quarkus extensions allows to use MapStruct in native quarkus applications.
 
 Please refer to the documentation available at https://docs.quarkiverse.io/quarkus-mapstruct/dev/index.html
 
