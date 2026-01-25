@@ -1,5 +1,4 @@
 name: Mapstruct
-artifact: ${project.groupId}:${project.artifactId}:${project.version}
 description: "MapStruct: Code generator for Java bean mappings using convention over configuration."
 
 metadata:
