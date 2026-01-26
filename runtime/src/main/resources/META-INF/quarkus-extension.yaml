@@ -4,7 +4,7 @@ description: "MapStruct: Code generator for Java bean mappings using convention 
 metadata:
   keywords:
     - mapstruct
-  guide: https://docs.quarkiverse.io/mapstruct/dev/
+  guide: https://docs.quarkiverse.io/quarkus-mapstruct/dev/
   icon-url: https://raw.githubusercontent.com/mapstruct/mapstruct.org/refs/heads/main/static/images/favicon.ico
   categories:
     - "miscellaneous"
