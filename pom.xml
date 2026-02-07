@@ -16,6 +16,7 @@
     <modules>
         <module>deployment</module>
         <module>runtime</module>
+        <module>processor</module>
     </modules>
 
     <scm>
@@ -31,6 +32,8 @@
         <maven.compiler.release>17</maven.compiler.release>
 
         <compiler-plugin.version>3.14.1</compiler-plugin.version>
+        <maven-shade-plugin.version>3.6.1</maven-shade-plugin.version>
+
         <quarkus.version>3.31.0</quarkus.version>
         <mapstruct.version>1.6.3</mapstruct.version>
     </properties>

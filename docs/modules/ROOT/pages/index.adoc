@@ -76,7 +76,7 @@ However, the extension is always only tested against the newest version of MapSt
 <dependency>
     <groupId>org.mapstruct</groupId>
     <artifactId>mapstruct</artifactId>
-    <version>1.6.3</version>
+    <version>{mapstruct.version}</version>
 </dependency>
 ----
 

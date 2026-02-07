@@ -26,6 +26,7 @@
             <plugin>
                 <groupId>io.quarkus</groupId>
                 <artifactId>quarkus-maven-plugin</artifactId>
+                <extensions>true</extensions>
                 <executions>
                     <execution>
                         <goals>
@@ -100,6 +101,11 @@
             <plugin>
                 <groupId>org.asciidoctor</groupId>
                 <artifactId>asciidoctor-maven-plugin</artifactId>
+                <configuration>
+                    <attributes>
+                        <mapstruct.version>${mapstruct.version}</mapstruct.version>
+                    </attributes>
+                </configuration>
             </plugin>
         </plugins>
     </build>
