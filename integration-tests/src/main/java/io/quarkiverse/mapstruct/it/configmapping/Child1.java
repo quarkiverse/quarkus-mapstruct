@@ -1,8 +1,8 @@
 package io.quarkiverse.mapstruct.it.configmapping;
 
-import io.smallrye.config.ConfigMapping;
-
 import java.util.List;
+
+import io.smallrye.config.ConfigMapping;
 
 @ConfigMapping(beanStyleGetters = true)
 public interface Child1 {
