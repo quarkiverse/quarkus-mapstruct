@@ -42,6 +42,7 @@ public class AddressResource {
  <2> throws a ClassNotFoundException
 
 This extension automatically takes care of registering all:
+
 * `@Mapper` annotated classes
 * classes referenced in the `uses` attribute of the Mapper itself, and from the referenced `@MapperConfig`,
 * The decorator type from `@DecoratedWith`
